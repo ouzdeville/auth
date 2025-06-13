@@ -82,7 +82,8 @@ Une **authorization grant** est une "preuve" (jeton intermédiaire) fournie par 
              redirect_uri=https://www.client.com/url&
              scope=profile&
              response_type=code&
-             state=foobar```
+             state=foobar
+  ```
   
 - 👤 L'utilisateur s'authentifie via un **serveur d'autorisation**.
      - **Login + Mot de passe**  
