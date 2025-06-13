@@ -99,15 +99,13 @@ Une **authorization grant** est une "preuve" (jeton intermédiaire) fournie par 
   - **Authentification avec certificat client (mTLS)**  
     - Authentification mutuelle par certificat au niveau TLS.
   - **Authentification par clé publique (WebAuthn / Passkeys)**  
-    - Utilise des dispositifs comme YubiKey, empreinte digitale, reconnaissance faciale.  
+    - Utilise des dispositifs comme YubiKey, empreinte digitale, reconnaissance faciale pour un **Passwordless login** (sans mot de passe)
     - Norme **FIDO2 / WebAuthn**.
   - **Authentification via carte à puce / SmartCard**  
     - Spécifique aux environnements gouvernementaux ou militaires.
   - **Authentification via code d’invitation ou token d’accès initial**  
     - Utilisé pour des inscriptions ou activations sécurisées.
-  - **Passwordless login (sans mot de passe)**  
-    - Par lien magique envoyé par email.  
-    - Par WebAuthn (avec biométrie ou clé de sécurité).
+      
 - 🔐 Le serveur d’autorisation redirige alors le propriétaire de la ressource (l’utilisateur) vers le client (l’application), en lui transmettant un **code temporaire** d’autorisation.
   
        ```text
