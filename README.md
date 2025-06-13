@@ -453,7 +453,7 @@ L'action WebAuthnRegister dans Keycloak permet aux utilisateurs de s'enregistrer
                    
                              - soit en remplacement du mot de passe si tu actives le mode WebAuthn Passwordless ```
 
-  Répéter pour bob (mot de passe : `bob123`).
+  Répéter pour bob (mot de passe : `bob123`) en utilisant OTP (Google Authenticator / FreeOTP).
 
 ### 2.3 Créer des Rôles
 - Aller dans Roles > Add Role
