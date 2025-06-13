@@ -73,7 +73,42 @@ Une **authorization grant** est une "preuve" (jeton intermédiaire) fournie par 
 
 ### 1. Authorization Code (Standard flow and **grant_type=authorization_code** sur Keycloak)
 - ⚙️ Utilisé dans le flow le plus sécurisé.
+- 👤  L'utilisateur demande d'acceder au client, https://www.client.com/url
+- 💻  Le client redirige l'utilisateur sur le server auth,
+       ```text
+        https://www.authServeur.com/realms/tdsi/auth?
+             client_id=abc123&
+             redirect_uri=https://www.client.com/url&
+             scope=profile&
+             response_type=code&
+             state=foobar```
+  
 - 👤 L'utilisateur s'authentifie via un **serveur d'autorisation**.
+     - **Login + Mot de passe**  
+           - Authentification de base via formulaire.  
+           - Peut être relié à une base interne ou un LDAP.
+    - **Login + Mot de passe + OTP (2FA)**  
+           - Second facteur via code OTP (Time-based One-Time Password).  
+           - Généré par une app comme Google Authenticator, FreeOTP, etc.
+  - **Authentification via identités fédérées (SSO / Identity Brokering)**  
+    - SAML ou OpenID Connect (OIDC) avec des fournisseurs comme :  
+      - 🌐 Google, Facebook, GitHub, etc.  
+      - 🔐 Autres serveurs Keycloak ou Azure AD.
+  - **Authentification avec certificat client (mTLS)**  
+    - Authentification mutuelle par certificat au niveau TLS.
+  - **Authentification par clé publique (WebAuthn / Passkeys)**  
+    - Utilise des dispositifs comme YubiKey, empreinte digitale, reconnaissance faciale.  
+    - Norme **FIDO2 / WebAuthn**.
+  - **Authentification via carte à puce / SmartCard**  
+    - Spécifique aux environnements gouvernementaux ou militaires.
+  - **Authentification via code d’invitation ou token d’accès initial**  
+    - Utilisé pour des inscriptions ou activations sécurisées.
+  - **Passwordless login (sans mot de passe)**  
+    - Par lien magique envoyé par email.  
+    - Par WebAuthn (avec biométrie ou clé de sécurité).
+
+
+
 - Le serveur d’autorisation redirige alors le propriétaire de la ressource (l’utilisateur) vers le client (l’application), en lui transmettant un **code temporaire** d’autorisation.
 - 🧾 L’application échange ensuite ce **code temporaire** contre un **access_token** sécurisé aupres du **serveur d'autorisation**
 - ✅ Les identifiants de l'utilisateur ne sont **jamais partagés** avec le client.
