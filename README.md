@@ -359,20 +359,59 @@ L'action WebAuthnRegister dans Keycloak permet aux utilisateurs de s'enregistrer
 3. Le navigateur déclenche l’API WebAuthn
 
 4. Une fois enregistré, ce dispositif pourra être utilisé comme facteur secondaire à chaque login
-
+![image](https://github.com/user-attachments/assets/ffeaf854-28bc-4f95-a6b6-712dd4a4eff8)
 **Créer des Utilisateurs**
-- Aller dans Users > Add user.
 
-Exemple :
+🧑‍💻 1. Ajouter un nouvel utilisateur
 
-- Username : `alice`
+      🔹 Étapes :
+           1.1. Connecte-toi à l’interface d’administration Keycloak.
+           1.2. Dans le menu de gauche :
+               ➜ Va dans Users
+               ➜ Clique sur Add user
+           
+           1.3. Renseigne les informations :
+           
+               - Username : alice
+           
+               - Email : alice@example.com
+           
+               - (Optionnel : First Name / Last Name)
+           
+           1.4. Clique sur Create 
+   2. Définir le mot de passe
+      
+         🔹 Étapes :
+         2.1. Une fois l’utilisateur alice créé, tu es automatiquement redirigé vers sa fiche.
+         Sinon, va dans Users, cherche alice et clique sur son nom.
+         
+         2.2. Clique sur l’onglet Credentials
+         
+         2.3. Dans la section Set Password :
+         
+         Password : alice123
+         
+         Confirm Password : alice123
+         
+         Temporary : ❌ Décoche la case (pour que le mot de passe ne soit pas temporaire)
 
-- Email : alice@example.com
-
-- Cliquer sur `Create`
-
-- Dans l’onglet Credentials, définir un mot de passe (`alice123`) et désactiver Temporary.
-
+         2.4. Clique sur Set password
+         👉 Un message vert de confirmation s’affiche en haut : Password updated
+     3. Forcer l’enregistrement WebAuthn
+      
+          🔹 Étapes :
+          3.1. Va dans l’onglet Details de l’utilisateur alice
+          
+          Vérifie que le champ Enabled est activé (ON)
+          
+          3.2. Clique sur l’onglet Required Actions
+          
+          3.3. Dans la liste déroulante Add required action, sélectionne :
+          ➡️ WebAuthn Register
+          
+          3.4. Clique sur Add
+          
+          👉 L’action WebAuthn Register apparaît maintenant comme obligatoire à la prochaine connexion.
   Répéter pour bob (mot de passe : `bob123`).
 
 ### 2.3 Créer des Rôles
@@ -657,7 +696,7 @@ Lancer une requête vers votre API protégée.
 
 ---
 
-![image](https://github.com/user-attachments/assets/ffeaf854-28bc-4f95-a6b6-712dd4a4eff8)
+
 
 **Fin du TP**
 
