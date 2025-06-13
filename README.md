@@ -106,11 +106,32 @@ Une **authorization grant** est une "preuve" (jeton intermédiaire) fournie par 
   - **Passwordless login (sans mot de passe)**  
     - Par lien magique envoyé par email.  
     - Par WebAuthn (avec biométrie ou clé de sécurité).
-
-
-
-- Le serveur d’autorisation redirige alors le propriétaire de la ressource (l’utilisateur) vers le client (l’application), en lui transmettant un **code temporaire** d’autorisation.
-- 🧾 L’application échange ensuite ce **code temporaire** contre un **access_token** sécurisé aupres du **serveur d'autorisation**
+- 🔐 Le serveur d’autorisation redirige alors le propriétaire de la ressource (l’utilisateur) vers le client (l’application), en lui transmettant un **code temporaire** d’autorisation.
+       ```text
+           https://www.client.com/url?
+           code=oMsCeLvIaQm6bTrgtp7&
+           state=foobar
+       ```
+- 💻 L’application échange ensuite ce **code temporaire** contre un **access_token** sécurisé aupres du **serveur d'autorisation** (en back channel)
+           ```text
+           POST  https://www.authServeur.com/realms/tdsi/token
+               Content-Type: application/x-www-form-urlencoded
+               code=oMsCeLvIaQm6bTrgtp7&
+               client_id=abc123&
+               client_secret=secret123&
+               grant_type=authorization_code
+   ```
+    ```text
+      {
+           "access_token": "fFAGRNJru1FTz70BzhT3Zg",
+           "expires_in": 3920,
+           "token_type": "Bearer",      
+      }
+   ```
+   
+- Le client (AppMobile ou SPA) stoke le token et interroge le **Resource Server** (Backend, ....)
+            ```text  GET mybackend.com/some/endpoint
+                  Authorization: Bearer fFAGRNJru1FTz70BzhT3Zg   ```
 - ✅ Les identifiants de l'utilisateur ne sont **jamais partagés** avec le client.
 - 🔐 Permet d'authentifier le client et de garder le `access_token` hors du navigateur.
 - 💥 un attaquant peut intercepter le code d’autorisation et l’échanger contre un token.
