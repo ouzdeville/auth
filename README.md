@@ -380,7 +380,7 @@ L'action WebAuthnRegister dans Keycloak permet aux utilisateurs de s'enregistrer
            
            1.4. Clique sur Create 
    2. Définir le mot de passe
-      
+         ```text
          🔹 Étapes :
          2.1. Une fois l’utilisateur alice créé, tu es automatiquement redirigé vers sa fiche.
          Sinon, va dans Users, cherche alice et clique sur son nom.
@@ -396,7 +396,7 @@ L'action WebAuthnRegister dans Keycloak permet aux utilisateurs de s'enregistrer
          Temporary : ❌ Décoche la case (pour que le mot de passe ne soit pas temporaire)
 
          2.4. Clique sur Set password
-         👉 Un message vert de confirmation s’affiche en haut : Password updated
+         👉 Un message vert de confirmation s’affiche en haut : Password updated ```
      3. Forcer l’enregistrement WebAuthn
       
           🔹 Étapes :
@@ -411,7 +411,48 @@ L'action WebAuthnRegister dans Keycloak permet aux utilisateurs de s'enregistrer
           
           3.4. Clique sur Add
           
-          👉 L’action WebAuthn Register apparaît maintenant comme obligatoire à la prochaine connexion.
+          👉 L’action WebAuthn Register apparaît maintenant comme obligatoire à la prochaine connexion.```
+
+
+  
+      ```text
+             👩‍💼 Ce que verra Alice à sa connexion
+                   🔐 Étape 1 – Authentification classique
+                                Nom d’utilisateur : alice
+                                
+                                Mot de passe : alice123
+                   
+                   ➡️ Elle clique sur "Se connecter"
+                   
+                   🛡️ Étape 2 – Enregistrement WebAuthn
+                   Keycloak affiche une page avec ce type de message :
+                   
+                   "Vous devez enregistrer un nouvel authentificateur de sécurité (WebAuthn) pour sécuriser votre compte."
+                   
+                   Elle a alors plusieurs options selon le matériel disponible :
+                   
+                          💾 Clé de sécurité FIDO2 (type YubiKey, Feitian, etc.)
+                                ➜ Elle branche la clé et appuie dessus quand c’est demandé.
+                   
+                          🖐️ Biométrie locale :
+                   
+                                     Windows Hello (reconnaissance faciale, empreinte ou code PIN)
+                   
+                                     Touch ID sur macOS
+                   
+                                     Capteur biométrique Android (navigateur compatible)
+                   
+                           📱 Authenticator intégré (via NFC, Bluetooth, etc.)
+                   
+                   ✅ Une fois le dispositif enregistré :
+                       - L’appareil est lié au compte d’Alice
+                   
+                       - À la prochaine connexion, il pourra être utilisé :
+                   
+                             - soit comme second facteur (avec le mot de passe)
+                   
+                             - soit en remplacement du mot de passe si tu actives le mode WebAuthn Passwordless ```
+
   Répéter pour bob (mot de passe : `bob123`).
 
 ### 2.3 Créer des Rôles
