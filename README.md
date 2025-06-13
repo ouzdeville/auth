@@ -117,22 +117,22 @@ Une **authorization grant** est une "preuve" (jeton intermédiaire) fournie par 
        ```
 - 💻 L’application échange ensuite ce **code temporaire** contre un **access_token** sécurisé aupres du **serveur d'autorisation** (en back channel)
   
-           ```text
-           POST  https://www.authServeur.com/realms/tdsi/token
-               Content-Type: application/x-www-form-urlencoded
-               code=oMsCeLvIaQm6bTrgtp7&
-               client_id=abc123&
-               client_secret=secret123&
-               grant_type=authorization_code
-             ```
-   ----------------
-    ```text
-      {
-           "access_token": "fFAGRNJru1FTz70BzhT3Zg",
-           "expires_in": 3920,
-           "token_type": "Bearer",      
-      }
-   ```
+         ```http
+                 POST https://www.authServeur.com/realms/tdsi/protocol/openid-connect/token
+                 Content-Type: application/x-www-form-urlencoded
+
+                 code=oMsCeLvIaQm6bTrgtp7&
+                 client_id=abc123&
+                 client_secret=secret123&
+                 grant_type=authorization_code
+         ```
+                {
+                    "access_token": "fFAGRNJru1FTz70BzhT3Zg",
+                    "expires_in": 3920,
+                    "token_type": "Bearer",
+                    "refresh_token": "8xLOxBtZp8",
+                    "id_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  }
    
 - Le client (AppMobile ou SPA) stoke le token et interroge le **Resource Server** (Backend, ....)
             ```text  GET mybackend.com/some/endpoint
