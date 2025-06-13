@@ -643,5 +643,7 @@ Lancer une requête vers votre API protégée.
 
 ---
 
+![image](https://github.com/user-attachments/assets/ffeaf854-28bc-4f95-a6b6-712dd4a4eff8)
+
 **Fin du TP**
 
