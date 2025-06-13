@@ -75,6 +75,7 @@ Une **authorization grant** est une "preuve" (jeton intermédiaire) fournie par 
 - ⚙️ Utilisé dans le flow le plus sécurisé.
 - 👤  L'utilisateur demande d'acceder au client, https://www.client.com/url
 - 💻  Le client redirige l'utilisateur sur le server auth,
+  
        ```text
         https://www.authServeur.com/realms/tdsi/auth?
              client_id=abc123&
@@ -107,12 +108,14 @@ Une **authorization grant** est une "preuve" (jeton intermédiaire) fournie par 
     - Par lien magique envoyé par email.  
     - Par WebAuthn (avec biométrie ou clé de sécurité).
 - 🔐 Le serveur d’autorisation redirige alors le propriétaire de la ressource (l’utilisateur) vers le client (l’application), en lui transmettant un **code temporaire** d’autorisation.
+  
        ```text
            https://www.client.com/url?
            code=oMsCeLvIaQm6bTrgtp7&
            state=foobar
        ```
 - 💻 L’application échange ensuite ce **code temporaire** contre un **access_token** sécurisé aupres du **serveur d'autorisation** (en back channel)
+  
            ```text
            POST  https://www.authServeur.com/realms/tdsi/token
                Content-Type: application/x-www-form-urlencoded
