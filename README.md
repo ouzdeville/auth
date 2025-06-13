@@ -1,3 +1,4 @@
+# MASTER 1 TDSI
 # TP : Mise en place d'un système d'authentification centralisé avec Keycloak
 
 ## Objectif du TP (The delegated authorization Problem : how can i left a website to get accees to my data ?)
@@ -316,26 +317,29 @@ Les **Required User Actions** (actions utilisateur requises) sont des étapes su
 
 ##### Exemples courants d’actions requises :
 
-- **Changer le mot de passe**  
-  L'utilisateur doit modifier son mot de passe (par exemple après une première connexion ou suite à une politique de sécurité).
+| Action                           | Description                                           |
+| -------------------------------- | ----------------------------------------------------- |
+| **VERIFY\_EMAIL**                | Vérifie l’adresse email via envoi de lien             |
+| **UPDATE\_EMAIL**                | Met à jour l’adresse email                            |
+| **VERIFY\_PROFILE**              | Vérifie des champs de profil (attributs obligatoires) |
+| **UPDATE\_PROFILE**              | Permet de mettre à jour le profil (nom, téléphone…)   |
+| **UPDATE\_PASSWORD**             | Force la modification du mot de passe                 |
+| **CONFIGURE\_TOTP**              | Configure OTP (Google Authenticator / FreeOTP)        |
+| **UPDATE\_TOTP**                 | Processus interne de configuration OTP                |
+| **WebAuthnRegister**             | Inscription WebAuthn (2FA)                            |
+| **WebAuthnPasswordlessRegister** | Inscription WebAuthn sans mot de passe                |
+| **RecoveryAuthnCodesAction**     | Génère des codes de secours (2FA backup)              |
+| **TermsAndConditions**           | Accepte les CGU ou conditions                         |
+| **DeleteCredentialAction**       | Supprime une méthode d’authentification               |
+| **DeleteAccount**                | Permet à l’utilisateur de supprimer son compte        |
 
-- **Configurer l’authentification à deux facteurs (2FA)**  
-  L’utilisateur doit activer et configurer un moyen d’authentification supplémentaire (comme une application OTP).
-
-- **Vérifier l’adresse e-mail**  
-  L’utilisateur doit confirmer son adresse e-mail via un lien envoyé.
-
-- **Configurer les informations du profil**  
-  Compléter ou mettre à jour des informations personnelles obligatoires.
-
-- **Déconnecter d'autres sessions**  
-  Inviter l'utilisateur à fermer d'autres connexions actives.
 
 ##### Pourquoi utiliser les Required User Actions ?
 
 - Pour améliorer la sécurité du système d’authentification.
 - Pour s’assurer que les données utilisateurs sont complètes et à jour.
 - Pour imposer des politiques de sécurité avant d’autoriser l’accès aux ressources.
+- Car les mots de passe sont vulnérables au phishing et sont divulgués au public lorsque des sites web sont compromis ou piratés. Plus de 80 % des violations liées au piratage sont causées par des mots de passe volés ou faibles.
 
 ---
 
