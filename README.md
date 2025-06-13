@@ -124,7 +124,8 @@ Une **authorization grant** est une "preuve" (jeton intermédiaire) fournie par 
                client_id=abc123&
                client_secret=secret123&
                grant_type=authorization_code
-   ```
+             ```
+   
     ```text
       {
            "access_token": "fFAGRNJru1FTz70BzhT3Zg",
