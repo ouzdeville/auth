@@ -343,8 +343,22 @@ Les **Required User Actions** (actions utilisateur requises) sont des étapes su
 
 ---
 
-**Résumé :**  
-Les Required User Actions sont des tâches que Keycloak force un utilisateur à réaliser lors de la connexion afin d’assurer la conformité et la sécurité de l’accès.
+**WebAuthnRegister**  offre une securite renforcer (si vous voulez sans mot de passe)
+L'action WebAuthnRegister dans Keycloak permet aux utilisateurs de s'enregistrer avec un dispositif FIDO2/WebAuthn (comme une clé de sécurité, Windows Hello, Touch ID, etc.) en complément du mot de passe.
+- Flow utilisateur
+ 1. L’utilisateur se connecte avec son mot de passe habituel
+
+ 2. Keycloak lui demande d’enregistrer un dispositif WebAuthn
+
+     - clé de sécurité USB/NFC (YubiKey, SoloKey…)
+
+     - reconnaissance faciale (Windows Hello)
+
+     - empreinte (Touch ID)
+
+3. Le navigateur déclenche l’API WebAuthn
+
+4. Une fois enregistré, ce dispositif pourra être utilisé comme facteur secondaire à chaque login
 
 **Créer des Utilisateurs**
 - Aller dans Users > Add user.
