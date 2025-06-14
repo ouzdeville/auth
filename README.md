@@ -644,15 +644,18 @@ app.use(session({
 const keycloak = new Keycloak({
   store: memoryStore
 }, {
-  realm: 'tdsi',                        // Ton realm Keycloak
-  'auth-server-url': 'http://localhost:8080/auth', // URL Keycloak
+  realm: 'tdsi',
+  'auth-server-url': 'http://localhost:8080',//
   'ssl-required': 'external',
-  resource: 'backend-api',              // Client ID dans Keycloak
-  'public-client': false,               // client confidentiel
+  'confidential-port': 0,
+  resource: 'backend-api',
+  'bearer-only': true,
+  'public-client': false,
   credentials: {
-    secret: 'WWrZ3E7CnwkFJsZSQ2YgXH2uD9n637xa'  // Client secret
+    secret: 'WWrZ3E7CnwkFJsZSQ2YgXH2uD9n637xa'
   }
-});
+}); // <-- suppression du 'as any' car ce fichier est en JavaScript
+
 
 app.use(keycloak.middleware());
 
@@ -668,6 +671,7 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`API démarrée sur http://localhost:${PORT}`);
 });
+
 ```
 Lancer le client avec 
 ```bash
