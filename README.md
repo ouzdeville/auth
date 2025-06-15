@@ -645,7 +645,7 @@ const keycloak = new Keycloak({
   store: memoryStore
 }, {
   realm: 'tdsi',
-  'auth-server-url': 'http://localhost:8080',//
+  'auth-server-url': 'http://localhost:8080',// pour les version recentes de keycloak sinon il fait mettre http://localhost:8080/auth
   'ssl-required': 'external',
   'confidential-port': 0,
   resource: 'backend-api',
