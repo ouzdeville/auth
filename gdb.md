@@ -1,4 +1,4 @@
-## Master 1 Securite des Systeme Embarque
+## Master 2 Securite des Systeme Embarque
 ## Ressources complémentaires et références
 
 ### Documentation technique
