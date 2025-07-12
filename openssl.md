@@ -158,6 +158,27 @@ openssl help
 openssl help 2>&1 | grep "^[a-z]" | wc -l
 ```
 
+**Principales commandes :**
+- `genrsa` : génération de clés RSA
+- `rsa` : manipulation des clés RSA
+- `enc` : chiffrement/déchiffrement symétrique
+- `dgst` : calcul d'empreintes et signatures
+- `req` : création de requêtes de certificats
+- `x509` : gestion des certificats X.509
+**Commandes à expliquer :**
+
+| Commande | Objectif | Explication attendue |
+|----------|----------|---------------------|
+| `openssl enc -base64 -in fichier` | Encodage Base64 | |
+| `openssl enc -base64 -d -in fichier` | Décodage Base64 | |
+| `openssl enc -aes-256-cbc -salt -in file.txt -out file.enc -k password` | Chiffrement AES | |
+| `openssl genrsa -out fichier.priv 2048` | Génération clé RSA | |
+| `openssl rsa -in fichier.priv -pubout -out fichier.pub` | Extraction clé publique | |
+| `openssl dgst -sha256 -sign rsa.priv -out signature fichier` | Signature numérique | |
+| `openssl req -new -key clé -out requête` | Requête de certificat | |
+
+---
+
 #### **💥 Mission 0.2 - Test de puissance explosive**
 ```bash
 # Tester la génération d'entropie
