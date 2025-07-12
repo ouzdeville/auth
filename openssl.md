@@ -205,10 +205,13 @@ openssl version -a | grep -E "(built|platform|compiler)"
 openssl engine -t
 ```
 
-**Questions d'approfondissement :**
+**Questions d'approfondissement :** 
+
 5. **Qu'est-ce qu'un "engine"** dans OpenSSL ? Quel est l'intérêt du hardware acceleration ?
-6. **Pourquoi OpenSSL est-il compilé** différemment selon les plateformes ?
-7. **FIPS mode** : À quoi sert cette option ? Dans quels contextes est-elle obligatoire ?
+   
+7. **Pourquoi OpenSSL est-il compilé** différemment selon les plateformes ?
+   
+9. **FIPS mode** : À quoi sert cette option ? Dans quels contextes est-elle obligatoire ?
 
 **⚡ Défi Performance :**
 ```bash
@@ -219,9 +222,12 @@ openssl speed sha1 sha256 sha512
 ```
 
 **Questions d'analyse :**
+
 8. **Pourquoi AES-128 est-il plus rapide** qu'AES-256 ? La sécurité en souffre-t-elle vraiment ?
-9. **Relation taille/temps RSA** : Expliquez mathématiquement pourquoi RSA-4096 est exponentiellement plus lent.
-10. **SHA-1 vs SHA-256** : Lequel est le plus rapide ? Pourquoi SHA-1 est-il déconseillé malgré sa rapidité ?
+   
+10. **Relation taille/temps RSA** : Expliquez mathématiquement pourquoi RSA-4096 est exponentiellement plus lent.
+    
+12. **SHA-1 vs SHA-256** : Lequel est le plus rapide ? Pourquoi SHA-1 est-il déconseillé malgré sa rapidité ?
 
 **🎯 Questions de debriefing spectaculaire :**
 1. Combien d'armes cryptographiques avez-vous à disposition ?
@@ -266,9 +272,12 @@ cat decoded_msg.txt
 
 **🔬 Défi Base64 :**
 11. **Qu'est-ce que Base64** exactement ? Pourquoi utilise-t-il 64 caractères ?
+
 12. **Calculez** : Un fichier de 100 octets, quelle sera sa taille après encodage Base64 ? (Formule mathématique attendue)
-13. **Padding** : À quoi servent les caractères `=` à la fin des chaînes Base64 ?
-14. **Sécurité par obscurité** : Donnez 3 exemples réels où Base64 est utilisé à tort comme "sécurité".
+    
+14. **Padding** : À quoi servent les caractères `=` à la fin des chaînes Base64 ?
+    
+16. **Sécurité par obscurité** : Donnez 3 exemples réels où Base64 est utilisé à tort comme "sécurité".
 
 **⚔️ Défi Cryptanalyse :**
 ```bash
@@ -279,9 +288,12 @@ echo "123password" | openssl enc -base64
 ```
 
 **Questions d'investigation :**
+
 15. **Patterns Base64** : Peut-on deviner le contenu original en analysant l'encodage ?
+
 16. **Dictionnaire d'attaque** : Comment un attaquant pourrait-il automatiser le décodage de milliers de chaînes Base64 ?
-17. **Détection automatique** : Écrivez un one-liner bash pour détecter si une chaîne est en Base64.
+    
+18. **Détection automatique** : Écrivez un one-liner bash pour détecter si une chaîne est en Base64.
 
 ---
 
@@ -334,9 +346,13 @@ ls -la document_classifie.txt document_chiffre.enc
 **🧠 Questions techniques de haut niveau :**
 
 **🔬 Défi Chiffrement Symétrique :**
+
 18. **AES vs DES** : Pourquoi DES est-il considéré comme obsolète ? Quelle est la taille de clé minimale recommandée aujourd'hui ?
+
 19. **Modes de chiffrement** : Quelle est la différence entre CBC, GCM, et CTR ? Lequel offre l'authentification ?
+    
 20. **Salage cryptographique** : À quoi sert exactement le `-salt` ? Que se passe-t-il si on l'omet ?
+    
 21. **PBKDF2** : Pourquoi utiliser `-pbkdf2` plutôt qu'un simple hachage du mot de passe ?
 
 **⚡ Défi Sécurité :**
@@ -347,8 +363,11 @@ echo "message secret" | openssl enc -aes-256-cbc -salt -k "password" | openssl e
 ```
 
 **Questions d'investigation :**
+
 22. **Pourquoi les résultats sont-ils différents** alors que le contenu et le mot de passe sont identiques ?
+    
 23. **Attaque par dictionnaire** : Comment le salage protège-t-il contre les rainbow tables ?
+    
 24. **IV (Initialization Vector)** : Quel est son rôle ? Que se passerait-il avec un IV fixe ?
 
 **🛡️ Défi Performance vs Sécurité :**
@@ -360,6 +379,7 @@ time openssl enc -aes-256-cbc -salt -in gros_fichier.txt -out aes256.enc -k "pas
 ```
 
 **Questions d'analyse :**
+
 25. **Compromis sécurité/performance** : Dans quels cas préférer AES-128 à AES-256 ?
 26. **Attaque par force brute** : Combien de temps faudrait-il pour casser AES-256 avec la technologie actuelle ?
 27. **Cryptographie post-quantique** : Pourquoi AES résistera-t-il aux ordinateurs quantiques ?
