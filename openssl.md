@@ -4,7 +4,7 @@
 ## 📋 Briefing de Mission
 
 ### 🎯 Contexte
-Vous êtes des **consultants en cybersécurité** travaillant pour l'agence **CyberGuard Sénégal**. Votre équipe de 2 experts a été missionnée pour sécuriser les communications d'une entreprise technologique sénégalaise qui a récemment subi des tentatives d'intrusion. 
+Vous êtes des **consultants en cybersécurité** travaillant pour l'agence **CyberGuard Sénégal**. Votre équipe de *2 experts a été missionnée pour sécuriser les communications d'une entreprise technologique sénégalaise qui a récemment subi des tentatives d'intrusion. 
 
 **Entreprise cliente :** TechSN Solutions  
 **Secteur :** Fintech (paiements mobiles)  
