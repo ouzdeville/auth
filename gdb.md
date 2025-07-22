@@ -292,6 +292,7 @@ gdb ./pile_simple
    (gdb) x/20i $rip        # Instructions à partir de RIP
    (gdb) x/s $rsp          # Chaîne de caractères si applicable
    ```
+Affiche 20 mots mémoire à partir de l’adresse dans $rsp, au format hexadécimal.
 
 2. Analysez les adresses des variables et faites des calculs :
    ```
