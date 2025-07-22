@@ -380,7 +380,9 @@ Affiche 20 mots mémoire à partir de l’adresse dans $rsp, au format hexadéci
    >end
    >end
    ```
-
+```
+   (gdb) analyze_recursion
+```
 3. Script avancé pour mesurer la croissance :
    
    Créez le fichier `script_recursion_avance.gdb` :
