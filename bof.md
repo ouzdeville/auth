@@ -102,7 +102,7 @@ EBP courant     → ├─────────────────┤  �
                   │ "AAAA"  (input) │  ← strcpy(buffer, input)
                   │                 │
                   │   (espace libre)│
-ESP            → └─────────────────┘
+ ESP            → └─────────────────┘
 ```
 
 **État avec buffer overflow (input > buffer size) :**
@@ -117,7 +117,7 @@ EBP courant     → ├─────────────────┤
                   │ "AAAA...AAAA"   │  ← Input trop long
                   │ "AAAA...AAAA"   │  ← Déborde du buffer
                   │ "AAAA...AAAA"   │  ← Écrase EBP et EIP
-ESP            → └─────────────────┘
+ ESP            → └─────────────────┘
 ```
 
 **Conséquence** : Au moment du `RET`, le processeur tente d'aller à l'adresse 0x41414141 → **SEGFAULT** !
@@ -163,8 +163,17 @@ int main(int argc, char *argv[])
 
 **Question 2.1.1** : Compilez le programme avec les options de sécurité désactivées :
 ```bash
-gcc -fno-stack-protector -z execstack -no-pie -o vuln1 vuln1.c
+gcc -m32 -fno-stack-protector -z execstack -no-pie -o vuln1 vuln1.c
 ```
+| Option                 | Signification                                                                                                                                                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-fno-stack-protector` | **Désactive la protection de la pile** (stack canary), ce qui rend le binaire vulnérable aux attaques de type **buffer overflow**.                                                        |
+| `-z execstack`         | **Rend la pile exécutable**. Cela permet d'exécuter du code injecté sur la pile (comme un shellcode).                                                                                     |
+| `-no-pie`              | **Désactive la génération de binaire PIE (Position Independent Executable)**. L'adresse de base du programme est fixe, ce qui facilite l’exploitation, car les adresses sont prévisibles. |
+| `-o vuln1`             | Spécifie le nom de l’exécutable final.                                                                                                                                                    |
+| `vuln1.c`              | Le fichier source à compiler.                                                                                                                                                             |
+
+
 
 **Question 2.1.2** : Testez le programme avec différentes tailles d'entrée :
 - `./vuln1 "ABC"`
