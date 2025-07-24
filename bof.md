@@ -168,7 +168,7 @@ sudo apt install gcc-multilib libc6-dev-i386
 
 **Question 2.1.1** : Compilez le programme avec les options de sécurité désactivées :
 ```bash
-gcc -m32 -fno-stack-protector -z execstack -no-pie -o vuln1 vuln1.c
+gcc -m32 -g -fno-stack-protector -z execstack -no-pie -o vuln1 vuln1.c
 ```
 | Option                 | Signification                                                                                                                                                                             |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
