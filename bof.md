@@ -160,6 +160,11 @@ int main(int argc, char *argv[])
     return 0;
 }
 ```
+```bash
+sudo dpkg --add-architecture i386
+sudo apt update
+sudo apt install gcc-multilib libc6-dev-i386
+```
 
 **Question 2.1.1** : Compilez le programme avec les options de sécurité désactivées :
 ```bash
