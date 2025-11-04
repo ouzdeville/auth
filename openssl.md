@@ -1,5 +1,5 @@
 # 🕵️ Mission CyberSec : Infiltration et Sécurisation
-**TP OpenSSL - Sécurité Réseaux et Systèmes M1 TDSI/LACGAA**
+**TP OpenSSL - Cybersécurité**
 
 ## 📋 Briefing de Mission
 
