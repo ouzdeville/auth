@@ -533,7 +533,7 @@ Remplir les champs suivants :
 4. Dans la configuration :
    - **Client type** : `Confidential` Le client est une application serveur qui peut stocker un client_secret en toute sécurité.
    - **Standard Flow Enabled** : `OFF` Pas de redirection : l'API ne gère pas d'interface utilisateur.
-   - **Direct Access Grants Enabled** : `ON` Permet à un utilisateur d’obtenir un token avec login + mot de passe (utile pour l’authentification directe depuis un script ou une app mobile).
+   - **Direct Access Grants Enabled** : `OFF` Permet à un utilisateur d’obtenir un token avec login + mot de passe (utile pour l’authentification directe depuis un script ou une app mobile).
    - **Service Accounts Enabled** : `ON` Permet à l'API de s’authentifier en tant que client, sans utilisateur (compte technique).
 5. Dans l'onglet **Credentials**, noter le `Client Secret`
 
