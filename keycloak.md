@@ -1,4 +1,3 @@
-# MASTER 1 TDSI
 # TP : Mise en place d'un système d'authentification centralisé avec Keycloak
 
 ## Objectif du TP (The delegated authorization Problem : how can i left a website to get accees to my data ?)
